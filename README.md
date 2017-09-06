@@ -1,7 +1,7 @@
 tuiuiusaas
 ===========
 
-Saas application based on Tuiuiu.
+Saas application based on Wagtail.oi using django_tenants.
 
 
 #Up & Running
@@ -60,3 +60,7 @@ createsuperuser
     Password:
     Password (again):
     Superuser created successfully.
+
+
+# Credits
+
