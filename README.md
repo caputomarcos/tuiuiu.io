@@ -4,7 +4,7 @@ tuiuiusaas
 Saas application based on Wagtail.oi using django_tenants.
 
 
-#Up & Running
+# Up & Running
    
 create postgres database 
 ------------------------
@@ -62,5 +62,12 @@ createsuperuser
     Superuser created successfully.
 
 
-# Credits
+Credits
+-------
 
+Thank you for the wonderful work, Great Job!
+
+. Tom Turner under the name `django-tenants`_.
+. Bernardo Pires under the name `django-tenant-schemas`_.
+. Vlada Macek under the name of `django-schemata`_.
+. Tom Dyson under the name `wagtail`_
