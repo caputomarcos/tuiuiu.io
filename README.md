@@ -1,5 +1,5 @@
-tuiuiusaas
-===========
+tuiuiu.io
+=========
 
 Saas application based on Wagtail.oi using django_tenants.
 
