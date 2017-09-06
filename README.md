@@ -14,7 +14,7 @@ create postgres database
 git clone
 ---------
     
-    $ git clone git@github.com:caputomarcos/tuiuiu.git && \
+    $ git clone git@github.com:caputomarcos/tuiuiu.io.git && \
     cd tuiuiu && \ 
     virtualenv env --python=python3 && \
     source env/bin/activate && \
