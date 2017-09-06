@@ -1,0 +1,10 @@
+{% load i18n %}
+{% if groups %}
+
+    {% include "tuiuiuusers/groups/list.html" %}
+
+    {% include "tuiuiuadmin/shared/pagination_nav.html" with items=groups is_searching=is_searching linkurl="tuiuiuusers_groups:index" %}
+{% else %}
+    {% url 'tuiuiuusers_groups:add' as tuiuiuusers_create_group_url %}
+    <p>{% blocktrans %}There are no groups configured. Why not <a href="{{ tuiuiuusers_create_group_url }}">add some</a>?{% endblocktrans %}</p>
+{% endif %}

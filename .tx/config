@@ -1,0 +1,98 @@
+[main]
+host = https://www.transifex.com
+
+[tuiuiu.tuiuiuadmin]
+file_filter = tuiuiu/tuiuiuadmin/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiuadmin/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiucore]
+file_filter = tuiuiu/tuiuiucore/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiucore/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiudocs]
+file_filter = tuiuiu/tuiuiudocs/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiudocs/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiuimages]
+file_filter = tuiuiu/tuiuiuimages/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiuimages/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiuembeds]
+file_filter = tuiuiu/tuiuiuembeds/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiuembeds/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiuredirects]
+file_filter = tuiuiu/tuiuiuredirects/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiuredirects/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiusearch]
+file_filter = tuiuiu/tuiuiusearch/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiusearch/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiusnippets]
+file_filter = tuiuiu/tuiuiusnippets/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiusnippets/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiuusers]
+file_filter = tuiuiu/tuiuiuusers/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiuusers/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiuforms]
+file_filter = tuiuiu/tuiuiuforms/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiuforms/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiusites]
+file_filter = tuiuiu/tuiuiusites/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/tuiuiusites/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiusearchpromotions]
+file_filter = tuiuiu/contrib/tuiuiusearchpromotions/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/contrib/tuiuiusearchpromotions/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiustyleguide]
+file_filter = tuiuiu/contrib/tuiuiustyleguide/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/contrib/tuiuiustyleguide/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiusettings]
+file_filter = tuiuiu/contrib/settings/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/contrib/settings/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiumodeladmin]
+file_filter = tuiuiu/contrib/modeladmin/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/contrib/modeladmin/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[tuiuiu.tuiuiutableblock]
+file_filter = tuiuiu/contrib/table_block/locale/<lang>/LC_MESSAGES/django.po
+source_file = tuiuiu/contrib/table_block/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO

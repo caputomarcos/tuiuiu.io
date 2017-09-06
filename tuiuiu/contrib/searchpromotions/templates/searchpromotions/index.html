@@ -1,0 +1,26 @@
+{% extends "tuiuiuadmin/base.html" %}
+{% load i18n %}
+{% block titletag %}{% trans "Search Terms" %}{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script>
+        window.headerSearch = {
+            url: "{% url 'searchpromotions:index' %}",
+            termInput: "#id_q",
+            targetOutput: "#editorspicks-results"
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% trans "Promoted search results" as sp_title_str %}
+    {% trans "Add new promoted result" as sp_text_str %}
+    {% include "tuiuiuadmin/shared/header.html" with title=sp_title_str add_link="searchpromotions:add" icon="pick" add_text=sp_text_str search_url="searchpromotions:index" %}
+
+     <div class="nice-padding">
+        <div id="editorspicks-results" class="redirects">
+            {% include "searchpromotions/results.html" %}
+        </div>
+    </div>
+{% endblock %}

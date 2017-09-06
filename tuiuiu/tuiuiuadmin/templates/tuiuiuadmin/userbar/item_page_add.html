@@ -1,0 +1,8 @@
+{% extends "tuiuiuadmin/userbar/item_base.html" %}
+{% load i18n  %}
+
+{% block item_content %}
+    <div class="tuiuiu-action tuiuiu-icon tuiuiu-icon-plus">
+        <a href="{% url 'tuiuiuadmin_pages:add_subpage' self.page.id %}" target="_parent">{% trans 'Add a child page' %}</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% load staticfiles i18n %}
+<!-- Tuiuiu user bar embed code -->
+<div class="tuiuiu-userbar-reset">
+    <div class="tuiuiu-userbar tuiuiu-userbar--{{ position|default:'bottom-right' }}" data-tuiuiu-userbar>
+        <link rel="stylesheet" href="{% static 'tuiuiuadmin/css/userbar.css' %}" type="text/css" />
+        <div class="tuiuiu-userbar-nav">
+            <div class="tuiuiu-icon tuiuiu-icon-tuiuiu tuiuiu-userbar-trigger" data-tuiuiu-userbar-trigger>
+                <span class="tuiuiu-userbar-help-text">{% trans 'Go to Tuiuiu admin interface' %}</span>
+            </div>
+            <div class='tuiuiu-userbar-items'>
+                {% for item in items %}
+                    {{ item|safe }}
+                {% endfor %}
+            </div>
+        </div>
+        <script src="{% static 'tuiuiuadmin/js/userbar.js' %}"></script>
+    </div>
+</div>
+<!-- end Tuiuiu user bar embed code -->

@@ -1,0 +1,8 @@
+{% load tuiuiucore_tags staticfiles %}
+
+<div class="panel nice-padding panel-upgrade-notification" style="display:none">
+    <div class="help-block help-warning">Tuiuiu upgrade available. Your version: <strong>{% tuiuiu_version %}</strong>. New version: <strong class="newversion"></strong>. <a class="releasenotes-link" href="">Read the release notes.</a></div>
+
+    <script>window.tuiuiuVersion = "{% tuiuiu_version %}";</script>
+    <script src="{% static 'tuiuiuadmin/js/upgrade_notify.js' %}" async="true"></script>
+</div>

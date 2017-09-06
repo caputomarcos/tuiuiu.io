@@ -1,0 +1,17 @@
+{% load i18n tuiuiuadmin_tags %}
+{% trans "Add an external link" as add_str %}
+{% include "tuiuiuadmin/shared/header.html" with title=add_str %}
+
+<div class="nice-padding">
+    {% include 'tuiuiuadmin/chooser/_link_types.html' with current='external' %}
+
+    <form action="{% url 'tuiuiuadmin_choose_page_external_link' %}{% querystring %}" method="post" novalidate>
+        {% csrf_token %}
+        <ul class="fields">
+            {% for field in form %}
+                {% include "tuiuiuadmin/shared/field_as_li.html" %}
+            {% endfor %}
+            <li><input type="submit" value="{% trans 'Insert link' %}" class="button" /></li>
+        </ul>
+    </form>
+</div>

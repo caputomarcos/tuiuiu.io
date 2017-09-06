@@ -1,0 +1,14 @@
+{% extends "tuiuiuadmin/base.html" %}
+{% load i18n %}
+{% block titletag %}{% trans "Forms" %}{% endblock %}
+{% block content %}
+    {% trans "Forms" as forms_str %}
+    {% trans "Pages" as select_form_str %}
+    {% include "tuiuiuadmin/shared/header.html" with title=forms_str subtitle=select_form_str icon="form" %}
+
+    <div class="nice-padding">
+        <div id="form-results" class="forms">
+            {% include "tuiuiuforms/results_forms.html" %}
+        </div>
+    </div>
+{% endblock %}

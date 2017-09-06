@@ -1,0 +1,18 @@
+machine:
+  python:
+    version: 3.6.1
+
+dependencies:
+  pre:
+    - pip install -e .[testing]
+    - gem install scss-lint
+
+test:
+  override:
+    - flake8 tuiuiu
+    - isort --check-only --diff --recursive tuiuiu
+    - npm run lint
+    - scss-lint
+    - python -u runtests.py
+    - npm run test:unit:coverage -- --runInBand
+    - npm run build

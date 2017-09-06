@@ -1,0 +1,65 @@
+{% extends "tuiuiuadmin/skeleton.html" %}
+{% load i18n staticfiles tuiuiuadmin_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'tuiuiuadmin/css/vendor/jquery-ui/jquery-ui-1.10.3.verdant.css' %}" />
+    <link rel="stylesheet" href="{% static 'tuiuiuadmin/css/vendor/jquery.tagit.css' %}">
+    <link rel="stylesheet" href="{% static 'tuiuiuadmin/css/core.css' %}" type="text/css" />
+    {% hook_output 'insert_global_admin_css' %}
+
+    {% block extra_css %}{% endblock %}
+{% endblock %}
+
+{% block branding_favicon %}
+    <link rel="shortcut icon" href="{% static 'tuiuiuadmin/images/favicon.ico' %}" />
+{% endblock %}
+
+{% block js %}
+    <script>
+        (function(document, window) {
+            window.tuiuiuConfig = window.tuiuiuConfig || {};
+            tuiuiuConfig.ADMIN_API = {
+                PAGES: '{% url "tuiuiuadmin_api_v1:pages:listing" %}',
+                DOCUMENTS: '{% url "tuiuiuadmin_api_v1:documents:listing" %}',
+                IMAGES: '{% url "tuiuiuadmin_api_v1:images:listing" %}',
+                {# // Use this to add an extra query string on all API requests. #}
+                {# // Example value: '&order=-id' #}
+                EXTRA_CHILDREN_PARAMETERS: '',
+            };
+
+            tuiuiuConfig.STRINGS = {
+                EDIT: "{% trans 'Edit' %}",
+                PAGE: "{% trans 'Page' %}",
+                PAGES: "{% trans 'Pages' %}",
+                LOADING: "{% trans 'Loading...' %}",
+                NO_RESULTS: "{% trans 'No results' %}",
+                SERVER_ERROR: "{% trans 'Server Error' %}",
+                SEE_CHILDREN: "{% trans 'See children' %}",
+                SEE_ALL: "{% trans 'See all' %}",
+                CLOSE_EXPLORER: "{% trans 'Close explorer' %}",
+            };
+
+            tuiuiuConfig.ADMIN_URLS = {
+                PAGES: '{% url "tuiuiuadmin_explore_root" %}'
+            };
+        })(document, window);
+    </script>
+    <script src="{% static 'tuiuiuadmin/js/vendor/jquery-2.2.1.min.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/vendor/jquery-ui-1.10.3.min.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/vendor/jquery.datetimepicker.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/vendor/jquery.autosize.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/vendor/bootstrap-transition.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/vendor/bootstrap-modal.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/vendor/bootstrap-tab.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/vendor/tag-it.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/core.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/vendor.js' %}"></script>
+    <script src="{% static 'tuiuiuadmin/js/tuiuiuadmin.js' %}"></script>
+    {% hook_output 'insert_global_admin_js' %}
+
+
+
+    {% main_nav_js %}
+
+    {% block extra_js %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "tuiuiuadmin/admin_base.html" %}
+{% load tuiuiuadmin_tags tuiuiucore_tags staticfiles i18n %}
+
+{% block furniture %}
+    <div class="nav-wrapper">
+        <div class="inner">
+            <a href="{% url 'tuiuiuadmin_home' %}" class="logo" title="Tuiuiu v.{% tuiuiu_version %}">
+                {% block branding_logo %}
+                    <img class="tuiuiu-logo" src="{% static 'tuiuiuadmin/images/tuiuiu-logo.svg' %}" alt="Tuiuiu" width="80" />
+                {% endblock %}
+                <span>{% trans "Dashboard" %}</span>
+            </a>
+
+            {% menu_search %}
+            {% main_nav %}
+
+        </div>
+        <div class="explorer__wrapper" data-explorer-menu></div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content">
+            {# Always show messages div so it can be appended to by JS #}
+            <div class="messages">
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li class="{% message_tags message %}">{{ message|safe }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div id="nav-toggle" class="nav-toggle icon text-replace">{% trans "Menu" %}</div>
+
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+===========================
+Tuiuiu 1.3.1 release notes
+===========================
+
+.. contents::
+    :local:
+    :depth: 1
+
+What's changed
+==============
+
+Bug fixes
+~~~~~~~~~
+
+* Applied workaround for failing ``tuiuiuimages`` migration on Django 1.8.8 / 1.9.1 with Postgres (see `Django issue #26034 <https://code.djangoproject.com/ticket/26034>`_)

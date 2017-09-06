@@ -1,0 +1,11 @@
+{% extends "tuiuiuadmin/userbar/item_base.html" %}
+{% load i18n %}
+
+{% block item_content %}
+    <form action="{% url 'tuiuiuadmin_pages:reject_moderation' self.revision.id %}" target="_parent" method="post">
+        {% csrf_token %}
+        <div class="tuiuiu-action tuiuiu-icon tuiuiu-icon-cross">
+            <input type="submit" value="{% trans 'Reject' %}" class="button" />
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% load i18n %}
+{% trans "Popular search terms" as pop_str %}
+{% include "tuiuiuadmin/shared/header.html" with title=pop_str %}
+
+<div class="nice-padding">
+    <form class="query-search search-bar full-width" action="{% url 'tuiuiusearch_admin:queries_chooserresults' %}" method="GET" autocomplete="off" novalidate>
+        <ul class="fields">
+            {% for field in searchform %}
+                {% include "tuiuiuadmin/shared/field_as_li.html" with field=field %}
+            {% endfor %}
+            <li class="submit"><input type="submit" value="{% trans 'Search' %}" class="button" /></li>
+        </ul>
+    </form>
+
+    <div id="query-results">
+        {% include "tuiuiusearch/queries/chooser/results.html" %}
+    </div>
+</div>

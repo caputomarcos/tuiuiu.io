@@ -1,0 +1,9 @@
+{% load i18n tuiuiuadmin_tags %}
+
+{% if revisions %}
+    {% include "tuiuiuadmin/pages/revisions/list.html" %}
+
+    {% include "tuiuiuadmin/shared/pagination_nav.html" with items=revisions linkurl="tuiuiuadmin_pages:revisions_index" %}
+{% else %}
+    <p>{% blocktrans %}No revision of this page exist{% endblocktrans %}</p>
+{% endif %}

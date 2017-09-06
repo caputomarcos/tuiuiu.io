@@ -1,0 +1,8 @@
+{% extends "tuiuiuadmin/userbar/item_base.html" %}
+{% load i18n  %}
+
+{% block item_content %}
+    <div class="tuiuiu-action tuiuiu-icon tuiuiu-icon-tuiuiu">
+        <a href="{% url 'tuiuiuadmin_home' %}" target="_parent" class="">{% trans 'Go to Tuiuiu admin' %}</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "tuiuiuadmin/base.html" %}
+{% load i18n %}
+{% block titletag %}{% blocktrans with title=page.get_admin_display_title %}Copy {{ title }}{% endblocktrans %}{% endblock %}
+{% block content %}
+    {% trans "Copy" as copy_str %}
+    {% include "tuiuiuadmin/shared/header.html" with title=copy_str subtitle=page.get_admin_display_title icon="doc-empty-inverse" %}
+
+    <div class="nice-padding">
+        <form action="{% url 'tuiuiuadmin_pages:copy' page.id %}" method="POST" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+
+            <ul class="fields">
+                {% include "tuiuiuadmin/shared/field_as_li.html" with field=form.new_title %}
+                {% include "tuiuiuadmin/shared/field_as_li.html" with field=form.new_slug %}
+                {% include "tuiuiuadmin/shared/field_as_li.html" with field=form.new_parent_page %}
+
+                {% if form.copy_subpages %}
+                    {% include "tuiuiuadmin/shared/field_as_li.html" with field=form.copy_subpages %}
+                {% endif %}
+
+                {% if form.publish_copies %}
+                    {% include "tuiuiuadmin/shared/field_as_li.html" with field=form.publish_copies %}
+                {% endif %}
+            </ul>
+
+            <input type="submit" value="{% trans 'Copy this page' %}" class="button">
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    {% include "tuiuiuadmin/pages/_editor_js.html" %}
+{% endblock %}

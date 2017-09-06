@@ -1,0 +1,18 @@
+{% load tuiuiuimages_tags %}
+{% load i18n %}
+{% trans "Insert embed" as ins_emb_str %}
+{% include "tuiuiuadmin/shared/header.html" with title=ins_emb_str merged=1 %}
+
+<div class="tab-content">
+    <section id="form" class="active nice-padding">
+        <form class="embed-form" action="{% url 'tuiuiuembeds:chooser_upload' %}" method="POST" novalidate>
+            {% csrf_token %}
+            <ul class="fields">
+                {% for field in form %}
+                    {% include "tuiuiuadmin/shared/field_as_li.html" with field=field %}
+                {% endfor %}
+                <li><button type="submit" class="button  button-longrunning"><span class="icon icon-spinner"></span><em>{% trans 'Insert' %}</em></button></li>
+            </ul>
+        </form>
+    </section>
+</div>

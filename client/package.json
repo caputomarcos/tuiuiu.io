@@ -1,0 +1,21 @@
+{
+  "name": "tuiuiu-client",
+  "version": "0.1.0",
+  "repository": "https://github.com/tuiuiu/tuiuiu",
+  "description": "Tuiuiu's client side code",
+  "license": "BSD-3-Clause",
+  "author": "Tuiuiu",
+  "main": "src/index.js",
+  "bin": {
+    "tuiuiu": "./src/cli/index.js"
+  },
+  "files": [
+    "src/index.js"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "mustache": "^2.2.1",
+    "yargs": "^4.2.0"
+  },
+  "scripts": {}
+}

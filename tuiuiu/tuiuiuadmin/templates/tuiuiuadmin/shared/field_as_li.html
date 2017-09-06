@@ -1,0 +1,4 @@
+{% load tuiuiuadmin_tags %}
+<li class="{% if field.field.required %}required{% endif %} {{ wrapper_classes }} {{ li_classes }} {% if field.errors %}error{% endif %}">
+    {% include "tuiuiuadmin/shared/field.html" %}
+</li>

@@ -1,0 +1,11 @@
+{% load staticfiles %}
+<script>
+    window.chooserUrls = {
+        'pageChooser': '{% url "tuiuiuadmin_choose_page" %}'
+    };
+</script>
+
+<script src="{% static 'tuiuiuadmin/js/page-chooser.js' %}"></script>
+<script src="{% static 'tuiuiuadmin/js/expanding_formset.js' %}"></script>
+<script src="{% static 'tuiuiuadmin/js/modal-workflow.js' %}"></script>
+<script src="{% static 'tuiuiuusers/js/group-form.js' %}"></script>

@@ -1,0 +1,122 @@
+.. _sitemap_generation:
+
+Sitemap generator
+=================
+
+This document describes how to create XML sitemaps for your Tuiuiu website
+using the ``tuiuiu.contrib.tuiuiusitemaps`` module.
+
+
+.. note::
+
+    As of Tuiuiu 1.10 the Django contrib sitemap app is used to generate
+    sitemaps.  However since Tuiuiu requires the Site instance to be available
+    during the sitemap generation you will have to use the views from the
+    ``tuiuiu.contrib.tuiuiusitemaps.views`` module instead of the views
+    provided by Django (``django.contrib.sitemaps.views``).
+
+    The usage of these views is otherwise identical, which means that
+    customisation and caching of the sitemaps are done using the default Django
+    patterns.  See the Django documentation for in-depth information.
+
+
+Basic configuration
+~~~~~~~~~~~~~~~~~~~
+
+
+You firstly need to add ``"django.contrib.sitemaps"`` to INSTALLED_APPS in your
+Django settings file:
+
+ .. code-block:: python
+
+    INSTALLED_APPS = [
+        ...
+
+        "django.contrib.sitemaps",
+    ]
+
+
+Then, in ``urls.py``, you need to add a link to the
+``tuiuiu.contrib.tuiuiusitemaps.views.sitemap`` view which generates the
+sitemap:
+
+.. code-block:: python
+
+    from tuiuiu.contrib.tuiuiusitemaps.views import sitemap
+
+    urlpatterns = [
+        ...
+
+        url('^sitemap\.xml$', sitemap),
+
+        ...
+
+        # Ensure that the 'sitemap' line appears above the default Tuiuiu page serving route
+        url(r'', include(tuiuiu_urls)),
+    ]
+
+
+You should now be able to browse to ``/sitemap.xml`` and see the sitemap
+working. By default, all published pages in your website will be added to the
+site map.
+
+
+Setting the hostname
+~~~~~~~~~~~~~~~~~~~~
+
+By default, the sitemap uses the hostname defined in the Tuiuiu Admin's
+``Sites`` area. If your default site is called ``localhost``, then URLs in the
+sitemap will look like:
+
+ .. code-block:: xml
+
+    <url>
+        <loc>http://localhost/about/</loc>
+        <lastmod>2015-09-26</lastmod>
+    </url>
+
+
+For tools like Google Search Tools to properly index your site, you need to set
+a valid, crawlable hostname. If you change the site's hostname from
+``localhost`` to ``mysite.com``, ``sitemap.xml`` will contain the correct URLs:
+
+ .. code-block:: xml
+
+    <url>
+        <loc>http://mysite.com/about/</loc>
+        <lastmod>2015-09-26</lastmod>
+    </url>
+
+
+Find out more about :ref:`working with Sites<site-model-ref>`.
+
+
+Customising
+~~~~~~~~~~~
+
+URLs
+----
+
+The ``Page`` class defines a ``get_sitemap_urls`` method which you can override
+to customise sitemaps per ``Page`` instance. This method must return a list of
+dictionaries, one dictionary per URL entry in the sitemap. You can exclude
+pages from the sitemap by returning an empty list.
+
+Each dictionary can contain the following:
+
+ - **location** (required) - This is the full URL path to add into the sitemap.
+ - **lastmod** - A python date or datetime set to when the page was last modified.
+ - **changefreq**
+ - **priority**
+
+You can add more but you will need to override the
+``sitemap.xml`` template in order for them to be displayed in the sitemap.
+
+
+Serving multiple sitemaps
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to support the sitemap indexes from Django then you will need to
+use the index view from ``tuiuiu.contrib.sitemaps.views`` instead of the index
+view from ``django.contrib.sitemaps.views``.  Please see the Django
+documentation for further details.

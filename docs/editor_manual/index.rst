@@ -1,0 +1,19 @@
+.. _editor_manual:
+
+Using Tuiuiu: an Editor's guide
+================================
+
+This section of the documentation is written for the users of a Tuiuiu-powered site. That is, the content editors, moderators and administrators who will be running things on a day-to-day basis.
+
+.. toctree::
+   :maxdepth: 3
+
+   intro
+   getting_started
+   finding_your_way_around/index
+   new_pages/index
+   editing_existing_pages
+   documents_images_snippets/index
+   managing_redirects
+   administrator_tasks/index
+   browser_issues

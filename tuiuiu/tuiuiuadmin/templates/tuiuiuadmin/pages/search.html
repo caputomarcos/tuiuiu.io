@@ -1,0 +1,23 @@
+{% extends "tuiuiuadmin/base.html" %}
+{% load i18n %}
+{% block titletag %}{% trans 'Search' %}{% endblock %}
+{% block extra_js %}
+    {{ block.super }}
+
+    <script>
+        window.headerSearch = {
+            url: "{% url 'tuiuiuadmin_pages:search' %}",
+            termInput: "#id_q",
+            targetOutput: "#page-results"
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% trans "Search" as search_str %}
+    {% include "tuiuiuadmin/shared/header.html" with title=search_str search_url="tuiuiuadmin_pages:search" icon="search" %}
+
+    <div id="page-results">
+        {% include "tuiuiuadmin/pages/search_results.html" %}
+    </div>
+{% endblock %}
