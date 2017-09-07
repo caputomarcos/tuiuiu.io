@@ -4,7 +4,9 @@ from django.db import connection
 
 from tuiuiu.tuiuiutenant.management.commands import SyncCommon
 from tuiuiu.tuiuiutenant.migration_executors import get_executor
-from tuiuiu.tuiuiutenant.utils import get_public_schema_name, get_tenant_model, schema_exists
+from tuiuiu.tuiuiutenant.utils import get_public_schema_name, get_tenant_model, schema_exists, get_public_domain_url, \
+    get_public_domain_name, get_public_domain_description, get_public_domain_superuser, \
+    get_public_domain_superuser_mail, get_public_domain_superuser_pass
 
 if django.VERSION >= (1, 9, 0):
     from django.db.migrations.exceptions import MigrationSchemaMissing
@@ -56,11 +58,13 @@ class Command(SyncCommon):
 
             from tuiuiu.tuiuiucustomers.models import Customer as customer
             if not customer.objects.filter(schema_name=get_public_schema_name()).exists():
-                customer(domain_url='tuiuiu.io',
+                customer(domain_url=get_public_domain_url(),
                          schema_name=get_public_schema_name(),
-                         name='tuiuiu.io',
-                         description='tuiuiu.io').save()
+                         name=get_public_domain_name(),
+                         description=get_public_domain_description()).save()
 
             from django.contrib.auth.models import User as user
-            if not user.objects.filter(username='admin').exists():
-                user.objects.create_superuser('admin', 'admin@tuiuiu.io', 'admin')
+            if not user.objects.filter(username=get_public_domain_superuser()).exists():
+                user.objects.create_superuser(username=get_public_domain_superuser(),
+                                              email=get_public_domain_superuser_mail(),
+                                              password=get_public_domain_superuser_pass())

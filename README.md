@@ -42,6 +42,17 @@ or
     $ python manage.py migrate_schemas
     $ python manage.py runserver 
     
+settings
+--------
+
+    PUBLIC_SCHEMA_NAME = 'public'
+    PUBLIC_DOMAIN_NAME = 'tuiuiu'
+    PUBLIC_DOMAIN_DESCRIPTION = 'Saas application based on Wagtail.oi using django_tenants.'
+    PUBLIC_DOMAIN_URL = 'tuiuiu.io'
+    PUBLIC_DOMAIN_SUPERUSER = 'admin'
+    PUBLIC_DOMAIN_SUPERUSER_PASS = 'admin'
+    PUBLIC_DOMAIN_SUPERUSER_MAIL = 'admin@tuiuiu.io'
+    
 credentials
 -----------
 
