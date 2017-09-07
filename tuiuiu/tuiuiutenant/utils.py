@@ -54,7 +54,7 @@ def get_public_domain_name():
     return getattr(settings, 'PUBLIC_DOMAIN_NAME', 'tuiuiu')
 
 def get_public_domain_description():
-    return getattr(settings, 'PUBLIC_DOMAIN_DESCRIPTION', 'Saas application based on Wagtail.oi using django_tenants.')
+    return getattr(settings, 'PUBLIC_DOMAIN_DESCRIPTION', 'Saas application based on Wagtail.oi using tenants.')
 
 def get_public_domain_url():
     return getattr(settings, 'PUBLIC_DOMAIN_URL', 'tuiuiu.io')
