@@ -21,19 +21,23 @@ except ImportError:
 
 
 install_requires = [
-    "google-api-python-client==1.6.2",
-    "Django>=1.8.1,<1.12",
-    "django-modelcluster>=3.1,<4.0",
-    "django-taggit>=0.20,<1.0",
-    "django-treebeard>=3.0,<5.0",
-    "djangorestframework>=3.1.3",
+    "pyasn1-modules==0.1.1",
     "pyasn1==0.3.3",
-    "pyasn1-modules==0.0.5",
+
+    "google-api-python-client==1.6.2",
+
     "Pillow>=2.6.1",
     "beautifulsoup4>=4.5.1",
     "html5lib>=0.999,<1",
     "Unidecode>=0.04.14",
     "Willow>=0.4,<0.5",
+
+    "Django>=1.8.1,<1.12",
+    "django-modelcluster>=3.1,<4.0",
+    "django-taggit>=0.20,<1.0",
+    "django-treebeard>=3.0,<5.0",
+    "djangorestframework>=3.1.3",
+
     "requests>=2.11.1,<3.0",
     "psycopg2>=2.7.3",
     "oauth2client>=4.1.2",
