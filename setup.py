@@ -28,6 +28,7 @@ install_requires = [
     "django-treebeard>=3.0,<5.0",
     "djangorestframework>=3.1.3",
     "pyasn1==0.3.3",
+    "pyasn1-modules==0.0.5",
     "Pillow>=2.6.1",
     "beautifulsoup4>=4.5.1",
     "html5lib>=0.999,<1",
