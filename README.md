@@ -1,10 +1,10 @@
-tuiuiusaas
-===========
+tuiuiu.io
+=========
 
-Saas application based on Tuiuiu.
+Saas application based on Wagtail.oi using django_tenants.
 
 
-#Up & Running
+# Up & Running
    
 create postgres database 
 ------------------------
@@ -14,49 +14,22 @@ create postgres database
 git clone
 ---------
     
-    $ git clone git@github.com:caputomarcos/tuiuiu.git && \
+    $ git clone git@github.com:caputomarcos/tuiuiu.io.git && \
     cd tuiuiu && \ 
     virtualenv env --python=python3 && \
     source env/bin/activate && \
     python setup.py install && \
-    tuiuiu start app && \
+    make develop && \
     cd app && \ 
     python manage.py migrate_schemas
-    
+        
 
-tenants 
+Credits
 -------
 
-    $ python manage.py shell << EOF
-    from customers.models import Client    
-    # mobb.io
-    Client(domain_url='mobb.io',
-    schema_name='public',
-    name='mobb.io',
-    description='Mobb io').save()   
-    # devel1.mobb.io 
-    Client(domain_url='devel1.mobb.io',
-    schema_name='tenant1',
-    name='Tenant1 - Awesome',
-    description='Our first real tenant, awesome!').save()    
-    # devel2.mobb.io 
-    Client(domain_url='devel2.mobb.io',
-    schema_name='tenant2',
-    name='Tenant2 - Even Awesome-r',
-    description='A second tenant, even more awesome!').save()
-    EOF
+Thank you for the wonderful work, Great Job!
 
-createsuperuser
----------------
-
-    $ python manage.py createsuperuser
-    Enter Tenant Schema ('?' to list schemas): ?
-    public - mobb.io
-    tenant1 - devel1.mobb.io
-    tenant2 - devel2.mobb.io
-    Enter Tenant Schema ('?' to list schemas): public
-    Username (leave blank to use 'root'): admin
-    Email address:
-    Password:
-    Password (again):
-    Superuser created successfully.
+   1. Tom Turner under the name `django-tenants`_.
+   2. Bernardo Pires under the name `django-tenant-schemas`_.
+   3. Vlada Macek under the name of `django-schemata`_.
+   4. Tom Dyson under the name `wagtail`_
