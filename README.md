@@ -34,6 +34,7 @@ git clone
         
 or 
     
+    $ mkdir tuiuiu.io && cd tuiuiu.io 
     $ virtualenv env --python=python3 && source env/bin/activate
     $ pip install git+https://github.com/caputomarcos/tuiuiu.io.git
     $ tuiuiu start app       
