@@ -3,12 +3,12 @@ from django.contrib.auth.models import User
 from django.db import connection, transaction
 
 from dts_test_app.models import DummyModel, ModelWithFkToPublicUser
-from django_tenants.test.cases import TenantTestCase
-from django_tenants.tests.testcases import BaseTestCase
-from django_tenants.utils import tenant_context, schema_context, schema_exists, get_tenant_model, get_public_schema_name, \
+from tuiuiu.contrib.tenants.test.cases import TenantTestCase
+from tuiuiu.contrib.tenants.tests.testcases import BaseTestCase
+from tuiuiu.contrib.tenants.utils import tenant_context, schema_context, schema_exists, get_tenant_model, get_public_schema_name, \
     get_tenant_domain_model
 
-from django_tenants.migration_executors import get_executor
+from tuiuiu.contrib.tenants.migration_executors import get_executor
 
 
 class TenantDataAndSettingsTest(BaseTestCase):
@@ -20,12 +20,12 @@ class TenantDataAndSettingsTest(BaseTestCase):
     @classmethod
     def setUpClass(cls):
         super(TenantDataAndSettingsTest, cls).setUpClass()
-        settings.SHARED_APPS = ('tenants',
+        settings.TUIUIU_SHARED_APPS = ('tenants',
                                 'customers')
-        settings.TENANT_APPS = ('dts_test_app',
+        settings.TUIUIU_TENANT_APPS = ('dts_test_app',
                                 'django.contrib.contenttypes',
                                 'django.contrib.auth', )
-        settings.INSTALLED_APPS = settings.SHARED_APPS + settings.TENANT_APPS
+        settings.INSTALLED_APPS = settings.TUIUIU_SHARED_APPS + settings.TUIUIU_TENANT_APPS
         cls.sync_shared()
 
         cls.public_tenant = get_tenant_model()(schema_name=get_public_schema_name())
@@ -46,7 +46,7 @@ class TenantDataAndSettingsTest(BaseTestCase):
         super(TenantDataAndSettingsTest, self).setUp()
 
     def tearDown(self):
-        from django_tenants.models import TenantMixin
+        from tuiuiu.contrib.tenants.models import TenantMixin
 
         connection.set_schema_to_public()
 
@@ -208,19 +208,19 @@ class BaseSyncTest(BaseTestCase):
     """
     MIGRATION_TABLE_SIZE = 1
 
-    SHARED_APPS = ('tenants',  # 2 tables
+    TUIUIU_SHARED_APPS = ('tenants',  # 2 tables
                    'customers',
                    'django.contrib.auth',  # 6 tables
                    'django.contrib.contenttypes', )  # 1 table
-    TENANT_APPS = ('django.contrib.sessions', )
+    TUIUIU_TENANT_APPS = ('django.contrib.sessions', )
 
     @classmethod
     def setUpClass(cls):
         super(BaseSyncTest, cls).setUpClass()
-        cls.INSTALLED_APPS = cls.SHARED_APPS + cls.TENANT_APPS
+        cls.INSTALLED_APPS = cls.TUIUIU_SHARED_APPS + cls.TUIUIU_TENANT_APPS
 
-        settings.SHARED_APPS = cls.SHARED_APPS
-        settings.TENANT_APPS = cls.TENANT_APPS
+        settings.TUIUIU_SHARED_APPS = cls.TUIUIU_SHARED_APPS
+        settings.TUIUIU_TENANT_APPS = cls.TUIUIU_TENANT_APPS
         settings.INSTALLED_APPS = cls.INSTALLED_APPS
 
         cls.available_apps = cls.INSTALLED_APPS
@@ -240,7 +240,7 @@ class BaseSyncTest(BaseTestCase):
 class TenantSyncTest(BaseSyncTest):
     def test_shared_apps_does_not_sync_tenant_apps(self):
         """
-        Tests that if an app is in SHARED_APPS, it does not get synced to
+        Tests that if an app is in TUIUIU_SHARED_APPS, it does not get synced to
         the a tenant schema.
         """
         shared_tables = self.get_tables_list_in_schema(get_public_schema_name())
@@ -249,7 +249,7 @@ class TenantSyncTest(BaseSyncTest):
 
     def test_tenant_apps_does_not_sync_shared_apps(self):
         """
-        Tests that if an app is in TENANT_APPS, it does not get synced to
+        Tests that if an app is in TUIUIU_TENANT_APPS, it does not get synced to
         the public schema.
         """
         tenant = get_tenant_model()(schema_name='test')
@@ -268,12 +268,12 @@ class TenantSyncTest(BaseSyncTest):
 
 
 class TestSyncTenantsWithAuth(BaseSyncTest):
-    SHARED_APPS = ('tenants',  # 2 tables
+    TUIUIU_SHARED_APPS = ('tenants',  # 2 tables
                    'customers',
                    'django.contrib.auth',  # 6 tables
                    'django.contrib.contenttypes',  # 1 table
                    'django.contrib.sessions', )  # 1 table
-    TENANT_APPS = ('django.contrib.sessions', )  # 1 table
+    TUIUIU_TENANT_APPS = ('django.contrib.sessions', )  # 1 table
 
     def _pre_setup(self):
         self.sync_shared()
@@ -281,7 +281,7 @@ class TestSyncTenantsWithAuth(BaseSyncTest):
 
     def test_tenant_apps_and_shared_apps_can_have_the_same_apps(self):
         """
-        Tests that both SHARED_APPS and TENANT_APPS can have apps in common.
+        Tests that both TUIUIU_SHARED_APPS and TUIUIU_TENANT_APPS can have apps in common.
         In this case they should get synced to both tenant and public schemas.
         """
         tenant = get_tenant_model()(schema_name='test')
@@ -299,15 +299,15 @@ class TestSyncTenantsWithAuth(BaseSyncTest):
 
 
 class TestSyncTenantsNoAuth(BaseSyncTest):
-    SHARED_APPS = ('tenants',  # 2 tables
+    TUIUIU_SHARED_APPS = ('tenants',  # 2 tables
                    'customers',
                    'django.contrib.contenttypes', )  # 1 table
-    TENANT_APPS = ('django.contrib.sessions', )  # 1 table
+    TUIUIU_TENANT_APPS = ('django.contrib.sessions', )  # 1 table
 
     def test_content_types_is_not_mandatory(self):
         """
-        Tests that even if content types is in SHARED_APPS, it's
-        not required in TENANT_APPS.
+        Tests that even if content types is in TUIUIU_SHARED_APPS, it's
+        not required in TUIUIU_TENANT_APPS.
         """
         tenant = get_tenant_model()(schema_name='test')
         tenant.save()
@@ -326,12 +326,12 @@ class SharedAuthTest(BaseTestCase):
     def setUp(self):
         super(SharedAuthTest, self).setUp()
 
-        settings.SHARED_APPS = ('tenants',
+        settings.TUIUIU_SHARED_APPS = ('tenants',
                                 'customers',
                                 'django.contrib.auth',
                                 'django.contrib.contenttypes', )
-        settings.TENANT_APPS = ('dts_test_app', )
-        settings.INSTALLED_APPS = settings.SHARED_APPS + settings.TENANT_APPS
+        settings.TUIUIU_TENANT_APPS = ('dts_test_app', )
+        settings.INSTALLED_APPS = settings.TUIUIU_SHARED_APPS + settings.TUIUIU_TENANT_APPS
         self.sync_shared()
         self.public_tenant = get_tenant_model()(schema_name=get_public_schema_name())
         self.public_tenant.save()
@@ -396,7 +396,7 @@ class SharedAuthTest(BaseTestCase):
 
     def test_direct_relation_to_public(self):
         """
-        Tests that a forward relationship through a foreign key to public from a model inside TENANT_APPS works.
+        Tests that a forward relationship through a foreign key to public from a model inside TUIUIU_TENANT_APPS works.
         """
         with tenant_context(self.tenant):
             self.assertEqual(User.objects.get(pk=self.user1.id),
@@ -406,7 +406,7 @@ class SharedAuthTest(BaseTestCase):
 
     def test_reverse_relation_to_public(self):
         """
-        Tests that a reverse relationship through a foreign keys to public from a model inside TENANT_APPS works.
+        Tests that a reverse relationship through a foreign keys to public from a model inside TUIUIU_TENANT_APPS works.
         """
         with tenant_context(self.tenant):
             users = User.objects.all().select_related().order_by('id')

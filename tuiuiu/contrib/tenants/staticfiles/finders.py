@@ -6,7 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from django.db import connection
 from collections import OrderedDict
 from django.core.exceptions import ImproperlyConfigured
-from django_tenants.utils import get_tenant_model
+from tuiuiu.contrib.tenants.utils import get_tenant_model
 
 
 class TenantFileSystemFinder(FileSystemFinder):

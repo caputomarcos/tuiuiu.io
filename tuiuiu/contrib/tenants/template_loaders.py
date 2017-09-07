@@ -11,7 +11,7 @@ from django.utils.encoding import force_bytes
 from django.utils._os import safe_join
 from django.db import connection
 from django.template.loaders.base import Loader as BaseLoader
-from django_tenants.postgresql_backend.base import FakeTenant
+from tuiuiu.contrib.tenants.postgresql_backend.base import FakeTenant
 
 
 import django

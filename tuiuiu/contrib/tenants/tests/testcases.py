@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.management import call_command
 from django.test import TransactionTestCase
 
-from django_tenants.utils import get_public_schema_name
+from tuiuiu.contrib.tenants.utils import get_public_schema_name
 
 
 class BaseTestCase(TransactionTestCase):
@@ -13,14 +13,14 @@ class BaseTestCase(TransactionTestCase):
     """
     @classmethod
     def setUpClass(cls):
-        settings.TENANT_MODEL = 'customers.Client'
-        settings.TENANT_DOMAIN_MODEL = 'customers.Domain'
-        settings.SHARED_APPS = ('tenants',
+        settings.TUIUIU_TENANT_MODEL = 'customers.Client'
+        settings.TUIUIU_TENANT_DOMAIN_MODEL = 'customers.Domain'
+        settings.TUIUIU_SHARED_APPS = ('tenants',
                                 'customers')
-        settings.TENANT_APPS = ('dts_test_app',
+        settings.TUIUIU_TENANT_APPS = ('dts_test_app',
                                 'django.contrib.contenttypes',
                                 'django.contrib.auth', )
-        settings.INSTALLED_APPS = settings.SHARED_APPS + settings.TENANT_APPS
+        settings.INSTALLED_APPS = settings.TUIUIU_SHARED_APPS + settings.TUIUIU_TENANT_APPS
         if '.test.com' not in settings.ALLOWED_HOSTS:
             settings.ALLOWED_HOSTS += ['.test.com']
         cls.available_apps = settings.INSTALLED_APPS

@@ -1,5 +1,5 @@
 from django.test import RequestFactory, Client
-from django_tenants.middleware.main import TenantMainMiddleware
+from tuiuiu.contrib.tenants.middleware.main import TenantMainMiddleware
 
 
 class TenantRequestFactory(RequestFactory):

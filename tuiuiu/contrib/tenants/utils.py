@@ -38,29 +38,29 @@ def tenant_context(tenant):
 
 
 def get_tenant_model():
-    return get_model(settings.TENANT_MODEL)
+    return get_model(settings.TUIUIU_TENANT_MODEL)
 
 
 def get_tenant_domain_model():
-    return get_model(settings.TENANT_DOMAIN_MODEL)
+    return get_model(settings.TUIUIU_TENANT_DOMAIN_MODEL)
 
 
 def get_public_schema_name():
-    return getattr(settings, 'PUBLIC_SCHEMA_NAME', 'public')
+    return getattr(settings, 'TUIUIU_PUBLIC_SCHEMA_NAME', 'public')
 
 
 def get_limit_set_calls():
-    return getattr(settings, 'TENANT_LIMIT_SET_CALLS', False)
+    return getattr(settings, 'TUIUIU_TENANT_LIMIT_SET_CALLS', False)
 
 
 def clean_tenant_url(url_string):
     """
     Removes the TENANT_TOKEN from a particular string
     """
-    if hasattr(settings, 'PUBLIC_SCHEMA_URLCONF'):
-        if (settings.PUBLIC_SCHEMA_URLCONF and
-                url_string.startswith(settings.PUBLIC_SCHEMA_URLCONF)):
-            url_string = url_string[len(settings.PUBLIC_SCHEMA_URLCONF):]
+    if hasattr(settings, 'TUIUIU_PUBLIC_SCHEMA_URLCONF'):
+        if (settings.TUIUIU_PUBLIC_SCHEMA_URLCONF and
+                url_string.startswith(settings.TUIUIU_PUBLIC_SCHEMA_URLCONF)):
+            url_string = url_string[len(settings.TUIUIU_PUBLIC_SCHEMA_URLCONF):]
     return url_string
 
 

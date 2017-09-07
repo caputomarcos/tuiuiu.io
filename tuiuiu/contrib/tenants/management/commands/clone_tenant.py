@@ -6,8 +6,8 @@ from django.utils.encoding import force_str
 from django.utils.six.moves import input
 from django.db.utils import IntegrityError
 from django.db import connection
-from django_tenants.clone import CloneSchema
-from django_tenants.utils import get_tenant_model, get_tenant_domain_model
+from tuiuiu.contrib.tenants.clone import CloneSchema
+from tuiuiu.contrib.tenants.utils import get_tenant_model, get_tenant_domain_model
 
 
 class Command(BaseCommand):

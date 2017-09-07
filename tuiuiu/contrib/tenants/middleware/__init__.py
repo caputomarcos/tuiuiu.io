@@ -1,6 +1,6 @@
 import warnings
 
-from django_tenants.middleware.main import TenantMainMiddleware
+from tuiuiu.contrib.tenants.middleware.main import TenantMainMiddleware
 
 
 class TenantMiddleware(TenantMainMiddleware):

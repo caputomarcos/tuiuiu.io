@@ -1,21 +1,21 @@
 from django.conf import settings
 from django.test.client import RequestFactory
 
-from django_tenants.middleware import TenantMiddleware
-from django_tenants.tests.testcases import BaseTestCase
-from django_tenants.utils import get_tenant_model, get_tenant_domain_model, get_public_schema_name
+from tuiuiu.contrib.tenants.middleware import TenantMiddleware
+from tuiuiu.contrib.tenants.tests.testcases import BaseTestCase
+from tuiuiu.contrib.tenants.utils import get_tenant_model, get_tenant_domain_model, get_public_schema_name
 
 
 class RoutesTestCase(BaseTestCase):
     @classmethod
     def setUpClass(cls):
         super(RoutesTestCase, cls).setUpClass()
-        settings.SHARED_APPS = ('tenants',
+        settings.TUIUIU_SHARED_APPS = ('tenants',
                                 'customers')
-        settings.TENANT_APPS = ('dts_test_app',
+        settings.TUIUIU_TENANT_APPS = ('dts_test_app',
                                 'django.contrib.contenttypes',
                                 'django.contrib.auth', )
-        settings.INSTALLED_APPS = settings.SHARED_APPS + settings.TENANT_APPS
+        settings.INSTALLED_APPS = settings.TUIUIU_SHARED_APPS + settings.TUIUIU_TENANT_APPS
         cls.available_apps = settings.INSTALLED_APPS
         cls.sync_shared()
         cls.public_tenant = get_tenant_model()(schema_name=get_public_schema_name())

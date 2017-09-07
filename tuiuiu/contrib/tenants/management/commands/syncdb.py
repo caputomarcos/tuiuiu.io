@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 if django.VERSION < (1, 9, 0):
 	from django.conf import settings
-	from django_tenants.utils import django_is_in_test_mode
+	from tuiuiu.contrib.tenants.utils import django_is_in_test_mode
 
 	from django.core.management.commands import syncdb
 

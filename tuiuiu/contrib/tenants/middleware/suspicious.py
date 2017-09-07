@@ -1,5 +1,5 @@
 from django.core.exceptions import DisallowedHost
-from django_tenants.middleware import TenantMainMiddleware
+from tuiuiu.contrib.tenants.middleware import TenantMainMiddleware
 
 
 class SuspiciousTenantMiddleware(TenantMainMiddleware):

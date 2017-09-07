@@ -1,35 +1,35 @@
 from django.conf import settings
 from django.apps import AppConfig
 from django.core.exceptions import ImproperlyConfigured
-from django_tenants.utils import get_public_schema_name, get_tenant_model
+from tuiuiu.contrib.tenants.utils import get_public_schema_name, get_tenant_model
 
 
 recommended_config = """
 Warning: You should put 'tenants' at the end of INSTALLED_APPS:
-INSTALLED_APPS = TENANT_APPS + SHARED_APPS + ('tenants',)
+INSTALLED_APPS = TUIUIU_TENANT_APPS + TUIUIU_SHARED_APPS + ('tenants',)
 This is necessary to overwrite built-in django management commands with
 their schema-aware implementations.
 """
 
 
-class DjangoTenantsConfig(AppConfig):
+class TenantsConfig(AppConfig):
     name = 'tenants'
-    verbose_name = "Django tenants"
+    verbose_name = "Tuiuiu tenants"
 
     def ready(self):
         from django.db import connection
 
         # Test for configuration recommendations. These are best practices,
         # they avoid hard to find bugs and unexpected behaviour.
-        if not hasattr(settings, 'TENANT_APPS'):
-            raise ImproperlyConfigured('TENANT_APPS setting not set')
+        if not hasattr(settings, 'TUIUIU_TENANT_APPS'):
+            raise ImproperlyConfigured('TUIUIU_TENANT_APPS setting not set')
 
-        if not settings.TENANT_APPS:
-            raise ImproperlyConfigured("TENANT_APPS is empty. "
+        if not settings.TUIUIU_TENANT_APPS:
+            raise ImproperlyConfigured("TUIUIU_TENANT_APPS is empty. "
                                        "Maybe you don't need this app?")
 
-        if not hasattr(settings, 'TENANT_MODEL'):
-            raise ImproperlyConfigured('TENANT_MODEL setting not set')
+        if not hasattr(settings, 'TUIUIU_TENANT_MODEL'):
+            raise ImproperlyConfigured('TUIUIU_TENANT_MODEL setting not set')
 
         if 'tenants.routers.TenantSyncRouter' not in settings.DATABASE_ROUTERS:
             raise ImproperlyConfigured("DATABASE_ROUTERS setting must contain "

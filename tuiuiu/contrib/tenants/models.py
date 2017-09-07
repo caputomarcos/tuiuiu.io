@@ -5,10 +5,10 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
 
 # noinspection PyProtectedMember
-from .postgresql_backend.base import _check_schema_name
-from .signals import post_schema_sync, schema_needs_to_be_sync
-from .utils import schema_exists, get_tenant_domain_model
-from .utils import get_public_schema_name
+from tuiuiu.contrib.tenants.postgresql_backend.base import _check_schema_name
+from tuiuiu.contrib.tenants.signals import post_schema_sync, schema_needs_to_be_sync
+from tuiuiu.contrib.tenants.utils import schema_exists, get_tenant_domain_model
+from tuiuiu.contrib.tenants.utils import get_public_schema_name
 
 
 class TenantMixin(models.Model):
@@ -173,7 +173,7 @@ class DomainMixin(models.Model):
     All models that store the domains must inherit this class
     """
     domain = models.CharField(max_length=253, unique=True, db_index=True)
-    tenant = models.ForeignKey(settings.TENANT_MODEL, db_index=True, related_name='domains')
+    tenant = models.ForeignKey(settings.TUIUIU_TENANT_MODEL, db_index=True, related_name='domains')
 
     # Set this to true if this is the primary domain
     is_primary = models.BooleanField(default=True)

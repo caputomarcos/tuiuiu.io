@@ -7,9 +7,9 @@ class StandardExecutor(MigrationExecutor):
     def run_migrations(self, tenants=None):
         tenants = tenants or []
 
-        if self.PUBLIC_SCHEMA_NAME in tenants:
-            run_migrations(self.args, self.options, self.codename, self.PUBLIC_SCHEMA_NAME)
-            tenants.pop(tenants.index(self.PUBLIC_SCHEMA_NAME))
+        if self.TUIUIU_PUBLIC_SCHEMA_NAME in tenants:
+            run_migrations(self.args, self.options, self.codename, self.TUIUIU_PUBLIC_SCHEMA_NAME)
+            tenants.pop(tenants.index(self.TUIUIU_PUBLIC_SCHEMA_NAME))
 
         for idx, schema_name in enumerate(tenants):
             run_migrations(self.args, self.options, self.codename, schema_name, idx=idx, count=len(tenants))

@@ -1,6 +1,6 @@
 
-from django_tenants.cache import make_key, reverse_key
-from django_tenants.test.cases import TenantTestCase
+from tuiuiu.contrib.tenants.cache import make_key, reverse_key
+from tuiuiu.contrib.tenants.test.cases import TenantTestCase
 
 
 class CacheHelperTestCase(TenantTestCase):

@@ -3,7 +3,7 @@ import sys
 from django.db import transaction
 
 from django.core.management.commands.migrate import Command as MigrateCommand
-from django_tenants.utils import get_public_schema_name
+from tuiuiu.contrib.tenants.utils import get_public_schema_name
 
 
 def run_migrations(args, options, executor_codename, schema_name, allow_atomic=True, idx=None, count=None):
@@ -54,7 +54,7 @@ class MigrationExecutor(object):
         self.args = args
         self.options = options
 
-        self.PUBLIC_SCHEMA_NAME = get_public_schema_name()
+        self.TUIUIU_PUBLIC_SCHEMA_NAME = get_public_schema_name()
 
     def run_migrations(self, tenants=None):
         raise NotImplementedError

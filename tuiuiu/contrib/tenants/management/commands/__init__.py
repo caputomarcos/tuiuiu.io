@@ -9,7 +9,7 @@ try:
     from django.utils.six.moves import input
 except ImportError:
     input = raw_input
-from django_tenants.utils import get_tenant_model, get_public_schema_name
+from tuiuiu.contrib.tenants.utils import get_tenant_model, get_public_schema_name
 
 
 class BaseTenantCommand(BaseCommand):
@@ -162,10 +162,10 @@ class SyncCommon(BaseCommand):
             self.sync_tenant = True
             self.sync_public = True
 
-        if hasattr(settings, 'TENANT_APPS'):
-            self.tenant_apps = settings.TENANT_APPS
-        if hasattr(settings, 'SHARED_APPS'):
-            self.shared_apps = settings.SHARED_APPS
+        if hasattr(settings, 'TUIUIU_TENANT_APPS'):
+            self.tenant_apps = settings.TUIUIU_TENANT_APPS
+        if hasattr(settings, 'TUIUIU_SHARED_APPS'):
+            self.shared_apps = settings.TUIUIU_SHARED_APPS
 
     def _notice(self, output):
         self.stdout.write(self.style.NOTICE(output))

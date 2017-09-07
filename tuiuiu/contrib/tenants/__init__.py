@@ -1,1 +1,1 @@
-default_app_config = 'tenants.apps.DjangoTenantsConfig'
+default_app_config = 'tenants.apps.TenantsConfig'

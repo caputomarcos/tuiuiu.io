@@ -12,7 +12,7 @@ class TenantSyncRouter(object):
         """
         Is 'app_label' present in 'apps_list'?
 
-        apps_list is either settings.SHARED_APPS or settings.TENANT_APPS, a
+        apps_list is either settings.TUIUIU_SHARED_APPS or settings.TUIUIU_TENANT_APPS, a
         list of app names.
 
         We check the presense of the app's name or the full path to the apps's
@@ -28,13 +28,13 @@ class TenantSyncRouter(object):
         # the imports below need to be done here else django <1.5 goes crazy
         # https://code.djangoproject.com/ticket/20704
         from django.db import connection
-        from django_tenants.utils import get_public_schema_name
+        from tuiuiu.contrib.tenants.utils import get_public_schema_name
 
         if connection.schema_name == get_public_schema_name():
-            if not self.app_in_list(app_label, settings.SHARED_APPS):
+            if not self.app_in_list(app_label, settings.TUIUIU_SHARED_APPS):
                 return False
         else:
-            if not self.app_in_list(app_label, settings.TENANT_APPS):
+            if not self.app_in_list(app_label, settings.TUIUIU_TENANT_APPS):
                 return False
 
         return None

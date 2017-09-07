@@ -4,8 +4,8 @@ from django.conf import settings
 from importlib import import_module
 
 from django.core.exceptions import ImproperlyConfigured, ValidationError
-from django_tenants.utils import get_public_schema_name, get_limit_set_calls
-from django_tenants.postgresql_backend.introspection import DatabaseSchemaIntrospection
+from tuiuiu.contrib.tenants.utils import get_public_schema_name, get_limit_set_calls
+from tuiuiu.contrib.tenants.postgresql_backend.introspection import DatabaseSchemaIntrospection
 import django.db.utils
 import psycopg2
 
@@ -122,7 +122,7 @@ class DatabaseWrapper(original_backend.DatabaseWrapper):
         # optionally limit the number of executions - under load, the execution
         # of `set search_path` can be quite time consuming
         if (not get_limit_set_calls()) or not self.search_path_set or self._previous_cursor != cursor:
-            # Store the cursor pointer to check if it has changed since we 
+            # Store the cursor pointer to check if it has changed since we
             # last validated.
             self._previous_cursor = cursor
             # Actual search_path modification for the cursor. Database will

@@ -1,5 +1,5 @@
-from django_tenants.cache import make_key
-from django_tenants.test.cases import FastTenantTestCase
+from tuiuiu.contrib.tenants.cache import make_key
+from tuiuiu.contrib.tenants.test.cases import FastTenantTestCase
 
 
 class TestFastTenant(FastTenantTestCase):

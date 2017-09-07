@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse as reverse_default
 from django.utils.functional import lazy
-from django_tenants.utils import clean_tenant_url
+from tuiuiu.contrib.tenants.utils import clean_tenant_url
 
 
 def reverse(viewname, urlconf=None, args=None, kwargs=None, current_app=None):

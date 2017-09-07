@@ -1,6 +1,6 @@
 import os
 from django.contrib.staticfiles.storage import StaticFilesStorage
-from django_tenants.files.storages import TenantStorageMixin
+from tuiuiu.contrib.tenants.files.storages import TenantStorageMixin
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 

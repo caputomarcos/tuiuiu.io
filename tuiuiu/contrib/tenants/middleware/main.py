@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import connection
 from django.http import Http404
-from django_tenants.utils import remove_www, get_public_schema_name, get_tenant_domain_model
+from tuiuiu.contrib.tenants.utils import remove_www, get_public_schema_name, get_tenant_domain_model
 import django
 
 if django.VERSION >= (1, 10, 0):
@@ -57,5 +57,5 @@ class TenantMainMiddleware(MIDDLEWARE_MIXIN):
         ContentType.objects.clear_cache()
 
         # Do we have a public-specific urlconf?
-        if hasattr(settings, 'PUBLIC_SCHEMA_URLCONF') and request.tenant.schema_name == get_public_schema_name():
-            request.urlconf = settings.PUBLIC_SCHEMA_URLCONF
+        if hasattr(settings, 'TUIUIU_PUBLIC_SCHEMA_URLCONF') and request.tenant.schema_name == get_public_schema_name():
+            request.urlconf = settings.TUIUIU_PUBLIC_SCHEMA_URLCONF

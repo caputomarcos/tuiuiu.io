@@ -1,9 +1,9 @@
 
 from django.db import DEFAULT_DB_ALIAS
 
-from django_tenants.migration_executors import get_executor
-from django_tenants.utils import get_tenant_model, get_public_schema_name, schema_exists
-from django_tenants.management.commands import SyncCommon
+from tuiuiu.contrib.tenants.migration_executors import get_executor
+from tuiuiu.contrib.tenants.utils import get_tenant_model, get_public_schema_name, schema_exists
+from tuiuiu.contrib.tenants.management.commands import SyncCommon
 
 
 class MigrateSchemasCommand(SyncCommon):
@@ -38,17 +38,17 @@ class MigrateSchemasCommand(SyncCommon):
                                         )
     def handle(self, *args, **options):
         super(MigrateSchemasCommand, self).handle(*args, **options)
-        self.PUBLIC_SCHEMA_NAME = get_public_schema_name()
+        self.TUIUIU_PUBLIC_SCHEMA_NAME = get_public_schema_name()
 
         if self.sync_public and not self.schema_name:
-            self.schema_name = self.PUBLIC_SCHEMA_NAME
+            self.schema_name = self.TUIUIU_PUBLIC_SCHEMA_NAME
 
         executor = get_executor(codename=self.executor)(self.args, self.options)
 
         if self.sync_public:
-            executor.run_migrations(tenants=[self.PUBLIC_SCHEMA_NAME])
+            executor.run_migrations(tenants=[self.TUIUIU_PUBLIC_SCHEMA_NAME])
         if self.sync_tenant:
-            if self.schema_name and self.schema_name != self.PUBLIC_SCHEMA_NAME:
+            if self.schema_name and self.schema_name != self.TUIUIU_PUBLIC_SCHEMA_NAME:
                 if not schema_exists(self.schema_name):
                     raise RuntimeError('Schema "{}" does not exist'.format(
                         self.schema_name))
@@ -57,7 +57,7 @@ class MigrateSchemasCommand(SyncCommon):
             else:
                 tenants = get_tenant_model().objects.only(
                     'schema_name').exclude(
-                    schema_name=self.PUBLIC_SCHEMA_NAME).values_list(
+                    schema_name=self.TUIUIU_PUBLIC_SCHEMA_NAME).values_list(
                     'schema_name', flat=True)
 
             executor.run_migrations(tenants=tenants)
