@@ -1,8 +1,10 @@
-
 from django.db import DEFAULT_DB_ALIAS
 
 from tuiuiu.contrib.tenants.migration_executors import get_executor
-from tuiuiu.contrib.tenants.utils import get_tenant_model, get_public_schema_name, schema_exists
+from tuiuiu.contrib.tenants.utils import get_tenant_model, get_public_schema_name, schema_exists, get_public_domain_url, \
+    get_public_domain_name, get_public_domain_description, get_public_domain_superuser, \
+    get_public_domain_superuser_mail, \
+    get_public_domain_superuser_pass
 from tuiuiu.contrib.tenants.management.commands import SyncCommon
 
 
@@ -17,14 +19,14 @@ class MigrateSchemasCommand(SyncCommon):
                             help=(
                                 'Database state will be brought to the state after that '
                                 'migration. Use the name "zero" to unapply all migrations.'
-                            ),)
+                            ), )
         parser.add_argument('--noinput', action='store_false', dest='interactive', default=True,
                             help='Tells Django to NOT prompt the user for input of any kind.')
         parser.add_argument('--no-initial-data', action='store_false', dest='load_initial_data', default=True,
                             help='Tells Django not to load any initial data after database synchronization.')
         parser.add_argument('--database', action='store', dest='database',
                             default=DEFAULT_DB_ALIAS, help='Nominates a database to synchronize. '
-                            'Defaults to the "default" database.')
+                                                           'Defaults to the "default" database.')
         parser.add_argument('--fake', action='store_true', dest='fake', default=False,
                             help='Mark migrations as run without actually running them')
         parser.add_argument('--fake-initial', action='store_true', dest='fake_initial', default=False,
@@ -35,7 +37,8 @@ class MigrateSchemasCommand(SyncCommon):
                             help='Show a list of all known migrations and which are applied')
         parser.add_argument('--run-syncdb', action='store_true', dest='run_syncdb',
                             help='Creates tables for apps without migrations.',
-                                        )
+                            )
+
     def handle(self, *args, **options):
         super(MigrateSchemasCommand, self).handle(*args, **options)
         self.TUIUIU_PUBLIC_SCHEMA_NAME = get_public_schema_name()
@@ -61,6 +64,24 @@ class MigrateSchemasCommand(SyncCommon):
                     'schema_name', flat=True)
 
             executor.run_migrations(tenants=tenants)
+
+            from tuiuiu.tuiuiucustomers.models import Customer as customer, Domain as domain
+            if not customer.objects.filter(schema_name=get_public_schema_name()).exists():
+                tenant = customer(schema_name=get_public_schema_name(),
+                                  name=get_public_domain_name(),
+                                  description=get_public_domain_description())
+                tenant.save()
+
+                if not domain.objects.filter(domain=get_public_domain_name()).exists():
+                    domain(domain=get_public_domain_name(),
+                           tenant=tenant,
+                           is_primary=True).save()
+
+            from django.contrib.auth.models import User as user
+            if not user.objects.filter(username=get_public_domain_superuser()).exists():
+                user.objects.create_superuser(username=get_public_domain_superuser(),
+                                              email=get_public_domain_superuser_mail(),
+                                              password=get_public_domain_superuser_pass())
 
 
 Command = MigrateSchemasCommand

@@ -11,7 +11,6 @@ This is necessary to overwrite built-in django management commands with
 their schema-aware implementations.
 """
 
-
 class TenantsConfig(AppConfig):
     name = 'tenants'
     verbose_name = "Tuiuiu tenants"

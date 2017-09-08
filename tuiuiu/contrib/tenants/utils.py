@@ -52,6 +52,24 @@ def get_public_schema_name():
 def get_limit_set_calls():
     return getattr(settings, 'TUIUIU_TENANT_LIMIT_SET_CALLS', False)
 
+def get_public_domain_name():
+    return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_NAME', 'tuiuiu')
+
+def get_public_domain_description():
+    return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_DESCRIPTION', 'Saas application based on Wagtail.oi using django_tenants.')
+
+def get_public_domain_url():
+    return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_URL', 'tuiuiu.io')
+
+def get_public_domain_superuser():
+    return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_SUPERUSER', 'admin')
+
+def get_public_domain_superuser_pass():
+    return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_SUPERUSER_PASS', 'admin')
+
+def get_public_domain_superuser_mail():
+    return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_SUPERUSER_MAIL', 'admin@tuiuiu.io')
+
 
 def clean_tenant_url(url_string):
     """

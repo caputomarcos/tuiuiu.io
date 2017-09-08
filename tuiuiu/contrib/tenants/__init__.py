@@ -1,1 +1,1 @@
-default_app_config = 'tenants.apps.TenantsConfig'
+#default_app_config = 'tuiuiu.contrib.tenants.apps.TenantsConfig'

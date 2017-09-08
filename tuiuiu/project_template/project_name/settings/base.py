@@ -43,7 +43,7 @@ ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'tuiuiu.tuiuiutenant.postgresql_backend',
+        'ENGINE': 'tuiuiu.contrib.tenants.postgresql_backend',
         'NAME': 'tuiuiutenant',  # Or path to database file if using sqlite3.
         'USER': 'tuiuiutenant',
         'PASSWORD': 'tuiuiutenant',
@@ -53,10 +53,10 @@ DATABASES = {
 }
 
 DATABASE_ROUTERS = (
-    'tuiuiu.tuiuiutenant.routers.TenantSyncRouter',
+    'tuiuiu.contrib.tenants.routers.TenantSyncRouter',
 )
 
-DEFAULT_FILE_STORAGE = 'tuiuiu.tuiuiutenant.storage.TenantFileSystemStorage'
+DEFAULT_FILE_STORAGE = 'tuiuiu.contrib.tenants.files.storage.TenantFileSystemStorage'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -88,42 +88,9 @@ BASE_URL = 'http://{{ project_name }}.tuiuiu.io'
 
 
 # Application definition
-SHARED_APPS = (
-    'home',
-    'search',
-
-    'tuiuiu.contrib.api',
-    'tuiuiu.contrib.frontendcache',
-    'tuiuiu.contrib.postgres_search',
-    'tuiuiu.contrib.routablepage',
-    'tuiuiu.contrib.searchpromotions',
-    'tuiuiu.contrib.settings',
-    'tuiuiu.contrib.sitemaps',
-    'tuiuiu.contrib.styleguide',
-    'tuiuiu.contrib.table_block',
-    'tuiuiu.contrib.modeladmin',
-    'tuiuiu.contrib.experiments',
-
-    'rest_framework',
-
-    'tuiuiu.tuiuiufontawesome',
-    #'tuiuiu.tuiuiualytics',
-    'tuiuiu.tuiuiuforms',
-    'tuiuiu.tuiuiuredirects',
-    'tuiuiu.tuiuiuembeds',
-    'tuiuiu.tuiuiusites',
-    'tuiuiu.tuiuiuusers',
-    'tuiuiu.tuiuiusnippets',
-    'tuiuiu.tuiuiudocs',
-    'tuiuiu.tuiuiuimages',
-    'tuiuiu.tuiuiusearch',
-    'tuiuiu.tuiuiutenant',
+TUIUIU_SHARED_APPS = (
+    'tuiuiu.contrib.tenants',
     'tuiuiu.tuiuiucustomers',
-    'tuiuiu.tuiuiuadmin',
-    'tuiuiu.tuiuiucore',
-
-    'modelcluster',
-    'taggit',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -134,9 +101,18 @@ SHARED_APPS = (
 )
 
 
-TENANT_APPS = (
-    'home',
-    'search',
+TUIUIU_TENANT_APPS = (
+    'django.contrib.contenttypes',
+
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'rest_framework',
+    'modelcluster',
+    'taggit',
 
     'tuiuiu.contrib.api',
     'tuiuiu.contrib.frontendcache',
@@ -150,12 +126,8 @@ TENANT_APPS = (
     'tuiuiu.contrib.modeladmin',
     'tuiuiu.contrib.experiments',
 
-
-    'rest_framework',
-
-    'tuiuiu.tuiuiufontawesome',
     # 'tuiuiu.tuiuiualytics',
-
+    'tuiuiu.tuiuiufontawesome',
     'tuiuiu.tuiuiuforms',
     'tuiuiu.tuiuiuredirects',
     'tuiuiu.tuiuiuembeds',
@@ -168,67 +140,23 @@ TENANT_APPS = (
     'tuiuiu.tuiuiuadmin',
     'tuiuiu.tuiuiucore',
 
-    'modelcluster',
-    'taggit',
-
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'home',
+    'search',
 )
 
-#INSTALLED_APPS = list(set(TENANT_APPS + SHARED_APPS))
 
-INSTALLED_APPS = [
-    'home',
-    'search',
-
-    'tuiuiu.contrib.api',
-    'tuiuiu.contrib.frontendcache',
-    'tuiuiu.contrib.modeladmin',
-    'tuiuiu.contrib.postgres_search',
-    'tuiuiu.contrib.routablepage',
-    'tuiuiu.contrib.searchpromotions',
-    'tuiuiu.contrib.settings',
-    'tuiuiu.contrib.sitemaps',
-    'tuiuiu.contrib.styleguide',
-    'tuiuiu.contrib.table_block',
-    'tuiuiu.contrib.experiments',
-
-    'rest_framework',
-
-    'tuiuiu.tuiuiufontawesome',
-    # 'tuiuiu.tuiuiualytics',
-
-    'tuiuiu.tuiuiuforms',
-    'tuiuiu.tuiuiuredirects',
-    'tuiuiu.tuiuiuembeds',
-    'tuiuiu.tuiuiusites',
-    'tuiuiu.tuiuiuusers',
-    'tuiuiu.tuiuiusnippets',
-    'tuiuiu.tuiuiudocs',
-    'tuiuiu.tuiuiuimages',
-    'tuiuiu.tuiuiusearch',
-    'tuiuiu.tuiuiutenant',
-    'tuiuiu.tuiuiucustomers',
-    'tuiuiu.tuiuiuadmin',
-    'tuiuiu.tuiuiucore',
-
-    'modelcluster',
-    'taggit',
-
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
+TUIUIU_TENANT_MODEL = "tuiuiucustomers.Customer"
+TUIUIU_TENANT_DOMAIN_MODEL = "tuiuiucustomers.Domain"
 
 
-TENANT_MODEL = "tuiuiu.tuiuiucustomers.Customer"
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+INSTALLED_APPS = list(set(TUIUIU_TENANT_APPS + TUIUIU_SHARED_APPS))
+
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
+
 
 
 MIDDLEWARE = [
@@ -241,7 +169,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
-    'tuiuiu.tuiuiutenant.middleware.TenantMiddleware',
+    'tuiuiu.contrib.tenants.middleware.main.TenantMainMiddleware',
     'tuiuiu.tuiuiucore.middleware.SiteMiddleware',
     'tuiuiu.tuiuiuredirects.middleware.RedirectMiddleware',
 
@@ -250,7 +178,18 @@ MIDDLEWARE = [
 
 # ROOT_URLCONF = '{{ project_name }}.urls'
 ROOT_URLCONF = '{{ project_name }}.urls_tenants'
-PUBLIC_SCHEMA_URLCONF = '{{ project_name }}.urls_public'
+TUIUIU_PUBLIC_SCHEMA_URLCONF = '{{ project_name }}.urls_public'
+
+# TUIUIU_PUBLIC_SCHEMA_NAME = 'tuiuiu'
+# TUIUIU_TENANT_LIMIT_SET_CALLS = False
+#
+# TUIUIU_PUBLIC_DOMAIN_NAME = 'tuiuiu'
+# TUIUIU_PUBLIC_DOMAIN_URL = 'tuiuiu.io'
+# TUIUIU_PUBLIC_DOMAIN_DESCRIPTION = 'Saas application based on Wagtail.oi using django_tenants.'
+#
+# TUIUIU_PUBLIC_DOMAIN_SUPERUSER = 'admin'
+# TUIUIU_PUBLIC_DOMAIN_SUPERUSER_PASS = 'admin'
+# TUIUIU_PUBLIC_DOMAIN_SUPERUSER_MAIL = 'admin@tuiuiu.io'
 
 TEMPLATES = [
     {
@@ -283,7 +222,7 @@ LOGGING = {
     },
     'filters': {
         'request': {
-            '()': 'tuiuiu.tuiuiutenant.log.TenantContextFilter'
+            '()': 'tuiuiu.contrib.tenants.log.TenantContextFilter'
         },
     },
     'handlers': {
