@@ -53,7 +53,7 @@ def get_limit_set_calls():
     return getattr(settings, 'TUIUIU_TENANT_LIMIT_SET_CALLS', False)
 
 def get_public_domain_name():
-    return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_NAME', 'tuiuiu')
+    return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_NAME', 'tuiuiu.io')
 
 def get_public_domain_description():
     return getattr(settings, 'TUIUIU_PUBLIC_DOMAIN_DESCRIPTION', 'Saas application based on Wagtail.oi using django_tenants.')

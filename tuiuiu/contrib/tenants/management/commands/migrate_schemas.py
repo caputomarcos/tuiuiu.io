@@ -65,10 +65,11 @@ class MigrateSchemasCommand(SyncCommon):
 
             executor.run_migrations(tenants=tenants)
 
-            from tuiuiu.tuiuiucustomers.models import Customer as customer, Domain as domain
+            from tuiuiu.tuiuiucustomers.models import Customer as customer
+            from tuiuiu.tuiuiucustomers.models import Domain as domain
             if not customer.objects.filter(schema_name=get_public_schema_name()).exists():
                 tenant = customer(schema_name=get_public_schema_name(),
-                                  name=get_public_domain_name(),
+                                  name=get_public_schema_name(),
                                   description=get_public_domain_description())
                 tenant.save()
 
