@@ -73,20 +73,20 @@ modeladmin_register(ExperimentModelAdmin)
 
 
 @hooks.register('before_serve_page')
-def check_tuiuiuexperiments(page, request, serve_args, serve_kwargs):
+def check_experiments(page, request, serve_args, serve_kwargs):
     # If the page being served is the goal page of an experiment, log a completion
-    completed_tuiuiuexperiments = Experiment.objects.filter(goal=page, status='live')
+    completed_experiments = Experiment.objects.filter(goal=page, status='live')
 
-    if completed_tuiuiuexperiments:
+    if completed_experiments:
         user_id = get_user_id(request)
 
-        for experiment in completed_tuiuiuexperiments:
+        for experiment in completed_experiments:
             experiment.record_completion_for_user(user_id, request)
 
     # If the page being served is the control page of an experiment, run the experiment
-    tuiuiuexperiments = Experiment.objects.filter(control_page=page, status__in=('live', 'completed'))
-    if tuiuiuexperiments:
-        experiment = tuiuiuexperiments[0]
+    experiments = Experiment.objects.filter(control_page=page, status__in=('live', 'completed'))
+    if experiments:
+        experiment = experiments[0]
 
         if experiment.status == 'completed' and experiment.winning_variation is not None:
             variation = experiment.winning_variation

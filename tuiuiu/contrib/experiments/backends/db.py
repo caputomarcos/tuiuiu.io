@@ -4,17 +4,17 @@ import datetime
 
 from django.db.models import F, Sum
 
-from tuiuiu.contrib.experiments import ExperimentHistory
+from tuiuiu.contrib.experiments.models import ExperimentHistory
 
 
 def record_participant(experiment, user_id, variation, request):
     # abort if this user has participated already
-    tuiuiuexperiments_started = request.session.get('tuiuiuexperiments_started', [])
-    if experiment.id in tuiuiuexperiments_started:
+    experiments_started = request.session.get('experiments_started', [])
+    if experiment.id in experiments_started:
         return
 
-    tuiuiuexperiments_started.append(experiment.id)
-    request.session['tuiuiuexperiments_started'] = tuiuiuexperiments_started
+    experiments_started.append(experiment.id)
+    request.session['experiments_started'] = experiments_started
 
     # get or create a History record for this experiment variation and the current date
     history, _ = ExperimentHistory.objects.get_or_create(
@@ -26,16 +26,16 @@ def record_participant(experiment, user_id, variation, request):
 
 def record_completion(experiment, user_id, variation, request):
     # abort if this user never started the experiment
-    if experiment.id not in request.session.get('tuiuiuexperiments_started', []):
+    if experiment.id not in request.session.get('experiments_started', []):
         return
 
     # abort if this user has completed already
-    tuiuiuexperiments_completed = request.session.get('tuiuiuexperiments_completed', [])
-    if experiment.id in tuiuiuexperiments_completed:
+    experiments_completed = request.session.get('experiments_completed', [])
+    if experiment.id in experiments_completed:
         return
 
-    tuiuiuexperiments_completed.append(experiment.id)
-    request.session['tuiuiuexperiments_completed'] = tuiuiuexperiments_completed
+    experiments_completed.append(experiment.id)
+    request.session['experiments_completed'] = experiments_completed
 
     # get or create a History record for this experiment variation and the current date
     history, _ = ExperimentHistory.objects.get_or_create(

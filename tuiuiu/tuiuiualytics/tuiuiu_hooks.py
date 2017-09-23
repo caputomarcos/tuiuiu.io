@@ -19,7 +19,7 @@ def register_admin_urls():
 def register_styleguide_menu_item():
     return MenuItem(
         _('Analytics'),
-        urlresolvers.reverse('wagalytics_dashboard'),
+        urlresolvers.reverse('tuiuiualytics_dashboard'),
         classnames='icon icon-fa-bar-chart',
         order=1000
     )

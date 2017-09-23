@@ -8,8 +8,8 @@ from django.utils.translation import ugettext as _
 from tuiuiu.tuiuiuadmin import messages
 from tuiuiu.tuiuiucore.models import Page
 
-from .models import Experiment, get_backend
-from .utils import get_user_id, impersonate_other_page, percentage
+from tuiuiu.contrib.experiments.models import Experiment, get_backend
+from tuiuiu.contrib.experiments.utils import get_user_id, impersonate_other_page, percentage
 
 
 def record_completion(request, slug):
